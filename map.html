@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/echarts/4.2.0-rc.2/echarts.min.js"></script>
+</head>
+<body >
+<div id="main" style="width: 505px;height: 530px;"></div>
+<script>
+
+    const myChart = echarts.init(document.getElementById('main'))
+    myChart.showLoading();
+    $.get('node_modules/echarts/map/json/province/gansu.json').done(function (geoJson) {
+      myChart.hideLoading();
+      echarts.registerMap('云南', geoJson);
+      myChart.setOption( {
+        visualMap: {
+          min: 0,
+          max: 500,
+          show: false,
+          splitNumber: 5,
+          inRange: {
+            color: ['#d94e5d', '#eac736', '#50a3ba'].reverse()
+          },
+          textStyle: {
+            color: '#fff'
+          }
+        },
+        geo: {
+          map: '云南',
+          label: {
+            normal: {
+              show: true,
+              color: '#fff'
+            },
+            emphasis: {
+              show: true,
+              color: '#fff'
+            }
+          },
+          roam: false,
+          itemStyle: {
+            normal: {
+              areaColor: '#40458e',
+              borderColor: '#6367ad',
+              borderWidth: 1.5
+            },
+            emphasis: {
+              areaColor: '#40458e'
+            }
+          },
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "bottom": 0
+        },
+      });
+    });
+
+</script>
+</body>
+</html>
